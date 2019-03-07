@@ -19,6 +19,9 @@ namespace Assignment5
             // TODO: load the pokemon151 xml
 
             // TODO: Add item reader and print out all the items
+            ItemReader itemReader = new ItemReader();
+            Item items = itemReader.Load("itemData.xml");
+            Console.WriteLine(items.Name);
 
             // TODO: hook up item data to display with the inventory
 
