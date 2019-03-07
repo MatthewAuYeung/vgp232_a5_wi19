@@ -17,27 +17,22 @@ namespace Assignment5.Data
         /// </summary>
         public ItemReader()
         {
-            serializer = new XmlSerializer(typeof(Item));
+            serializer = new XmlSerializer(typeof(ItemsData));
         }
 
-        /// <summary>
-        /// Load a xml file that contains Pokemon Data to be deserialized into a list of Pokemons
-        /// </summary>
-        /// <param name="filepath">The location of the xml file</param>
-        /// <returns>A list of Pokemons</returns>
-        public Item Load(string filepath)
+        public ItemsData Load(string filepath)
         {
             if (!File.Exists(filepath))
             {
                 throw new Exception(string.Format("{0} does not exist", filepath));
             }
 
-            Item item = null;
+            ItemsData itemsData = null;
             using (var file = new StreamReader(filepath))
             {
                 try
                 {
-                    item = serializer.Deserialize(file) as Item;
+                    itemsData = serializer.Deserialize(file) as ItemsData;
                 }
                 catch (Exception ex)
                 {
@@ -46,9 +41,8 @@ namespace Assignment5.Data
                 }
             }
 
-            return item;
+            return itemsData;
         }
 
     }
 }
-

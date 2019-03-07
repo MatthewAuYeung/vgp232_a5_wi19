@@ -20,9 +20,12 @@ namespace Assignment5
 
             // TODO: Add item reader and print out all the items
             ItemReader itemReader = new ItemReader();
-            Item items = itemReader.Load("itemData.xml");
-            Console.WriteLine(items.Name);
-
+            ItemsData items = itemReader.Load("itemData.xml");
+            foreach (Item item in items.Items)
+            {
+                Console.WriteLine(item.Name);
+            }
+          
             // TODO: hook up item data to display with the inventory
 
             var source = new Inventory()
