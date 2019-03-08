@@ -19,13 +19,33 @@ namespace Assignment5
             // TODO: load the pokemon151 xml
 
             // TODO: Add item reader and print out all the items
-            ItemReader itemReader = new ItemReader();
-            ItemsData items = itemReader.Load("itemData.xml");
-            foreach (Item item in items.Items)
+            using (XmlReader itemReader = XmlReader.Create("itemData.xml"))
             {
-                Console.WriteLine(item.Name);
+                while (itemReader.Read())
+                {
+                    if (itemReader.IsStartElement())
+                    {
+                        switch (itemReader.Name.ToString())
+                        {
+                            case "Name":
+                                Console.WriteLine("Item Name : " + itemReader.ReadElementContentAsString());
+                                break;
+                            case "UnlockRequirement":
+                                Console.WriteLine("UnlockRequirement : " + itemReader.ReadElementContentAsFloat());
+                                break;
+                            case "Description":
+                                Console.WriteLine("Description : " + itemReader.ReadElementContentAsString());
+                                break;
+                            case "Effect":
+                                Console.WriteLine("Effect : " + itemReader.ReadElementContentAsString());
+                                break;
+                        }
+                        Console.WriteLine("");
+                    }
+                }
             }
-          
+
+
             // TODO: hook up item data to display with the inventory
 
             var source = new Inventory()
@@ -56,11 +76,19 @@ namespace Assignment5
 
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Cannot load {0} due to the following {1}", 
+                    Console.WriteLine("Cannot load {0} due to the following {1}",
                         inventoryFile, ex.Message);
                 }
 
             }
+
+            Inventory myObject; 
+            XmlSerializer mySerializer = new XmlSerializer(typeof(Inventory));
+            FileStream myFileStream = new FileStream("inventory.xml", FileMode.Open);
+            myObject = (Inventory)
+            mySerializer.Deserialize(myFileStream);
+
+            ItemsData itemsData = new ItemsData();
 
 
             Console.ReadKey();

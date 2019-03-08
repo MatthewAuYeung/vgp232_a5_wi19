@@ -7,11 +7,9 @@ using System.Xml.Serialization;
 
 namespace Assignment5.Data
 {
-    [XmlRoot("ItemsData")]
     public class ItemsData
     {
-        [XmlArray("Items")]
-        [XmlArrayItem("Item")]
+        [XmlArray]
         public List<Item> Items { get; set; }
 
         /// <summary>
@@ -34,7 +32,7 @@ namespace Assignment5.Data
 
             foreach (var item in Items)
             {
-                if (item.UnlockRequirement == level)
+                if (item.UnlockRequirement <= level)
                 {
                     temp_list.Add(item);
                 }
@@ -56,13 +54,14 @@ namespace Assignment5.Data
 
             foreach (var item in Items)
             {
-                if(item.Name == name)
+                if (item.Name == name)
                 {
                     temp = item;
                 }
-            }
 
+            }
             return temp;
+
             //throw new NotImplementedException();
         }
     }
