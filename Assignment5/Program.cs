@@ -24,6 +24,13 @@ namespace Assignment5
             }
 
             // TODO: Add a pokemon bag with 2 bulbsaur, 1 charlizard, 1 mew and 1 dragonite
+            PokemonBag pokemonBag = new PokemonBag();
+
+            pokemonBag.Pokemons.Add(1); // bulbsaur
+            pokemonBag.Pokemons.Add(1); // bulbsaur
+            pokemonBag.Pokemons.Add(6); // charlizard
+            pokemonBag.Pokemons.Add(151); // mew
+            pokemonBag.Pokemons.Add(149); // dragonite
             // and save it out and load it back and list it out.
 
             Console.ReadKey();
