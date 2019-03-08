@@ -19,32 +19,30 @@ namespace Assignment5
             // TODO: load the pokemon151 xml
 
             // TODO: Add item reader and print out all the items
-            using (XmlReader itemReader = XmlReader.Create("itemData.xml"))
+            XmlReader itemReader = XmlReader.Create("itemData.xml");
+            ItemsData itemsData = new ItemsData();
+            while (itemReader.Read())
             {
-                while (itemReader.Read())
+                if (itemReader.IsStartElement())
                 {
-                    if (itemReader.IsStartElement())
+                    switch (itemReader.Name.ToString())
                     {
-                        switch (itemReader.Name.ToString())
-                        {
-                            case "Name":
-                                Console.WriteLine("Item Name : " + itemReader.ReadElementContentAsString());
-                                break;
-                            case "UnlockRequirement":
-                                Console.WriteLine("UnlockRequirement : " + itemReader.ReadElementContentAsFloat());
-                                break;
-                            case "Description":
-                                Console.WriteLine("Description : " + itemReader.ReadElementContentAsString());
-                                break;
-                            case "Effect":
-                                Console.WriteLine("Effect : " + itemReader.ReadElementContentAsString());
-                                break;
-                        }
-                        Console.WriteLine("");
+                        case "Name":
+                            Console.WriteLine("Item Name : " + itemReader.ReadElementContentAsString());
+                            break;
+                        case "UnlockRequirement":
+                            Console.WriteLine("UnlockRequirement : " + itemReader.ReadElementContentAsFloat());
+                            break;
+                        case "Description":
+                            Console.WriteLine("Description : " + itemReader.ReadElementContentAsString());
+                            break;
+                        case "Effect":
+                            Console.WriteLine("Effect : " + itemReader.ReadElementContentAsString());
+                            break;
                     }
+                    Console.WriteLine("");
                 }
             }
-
 
             // TODO: hook up item data to display with the inventory
 
@@ -82,14 +80,11 @@ namespace Assignment5
 
             }
 
-            Inventory myObject; 
+            Inventory myObject;
             XmlSerializer mySerializer = new XmlSerializer(typeof(Inventory));
             FileStream myFileStream = new FileStream("inventory.xml", FileMode.Open);
             myObject = (Inventory)
             mySerializer.Deserialize(myFileStream);
-
-            ItemsData itemsData = new ItemsData();
-
 
             Console.ReadKey();
         }
