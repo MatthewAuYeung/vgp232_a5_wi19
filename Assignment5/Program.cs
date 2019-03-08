@@ -17,6 +17,32 @@ namespace Assignment5
             PokemonReader reader = new PokemonReader();
             Pokedex pokedex = reader.Load("pokemon151.xml");
 
+            // TODO: Add item reader and print out all the items
+            using (XmlReader itemReader = XmlReader.Create("itemData.xml"))
+            {
+                while (itemReader.Read())
+                {
+                    if (itemReader.IsStartElement())
+                    {
+                        switch (itemReader.Name.ToString())
+                        {
+                            case "Name":
+                                Console.WriteLine("Item Name : " + itemReader.ReadElementContentAsString());
+                                break;
+                            case "UnlockRequirement":
+                                Console.WriteLine("UnlockRequirement : " + itemReader.ReadElementContentAsFloat());
+                                break;
+                            case "Description":
+                                Console.WriteLine("Description : " + itemReader.ReadElementContentAsString());
+                                break;
+                            case "Effect":
+                                Console.WriteLine("Effect : " + itemReader.ReadElementContentAsString());
+                                break;
+                        }
+                    }
+                    Console.WriteLine("");
+                }
+            }
             // List out all the pokemons loaded
             foreach (Pokemon pokemon in pokedex.Pokemons)
             {
