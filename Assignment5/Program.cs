@@ -19,30 +19,32 @@ namespace Assignment5
             // TODO: load the pokemon151 xml
 
             // TODO: Add item reader and print out all the items
-            XmlReader itemReader = XmlReader.Create("itemData.xml");
-            ItemsData itemsData = new ItemsData();
-            while (itemReader.Read())
+            using (XmlReader itemReader = XmlReader.Create("itemData.xml"))
             {
-                if (itemReader.IsStartElement())
+                while (itemReader.Read())
                 {
-                    switch (itemReader.Name.ToString())
+                    if (itemReader.IsStartElement())
                     {
-                        case "Name":
-                            Console.WriteLine("Item Name : " + itemReader.ReadElementContentAsString());
-                            break;
-                        case "UnlockRequirement":
-                            Console.WriteLine("UnlockRequirement : " + itemReader.ReadElementContentAsFloat());
-                            break;
-                        case "Description":
-                            Console.WriteLine("Description : " + itemReader.ReadElementContentAsString());
-                            break;
-                        case "Effect":
-                            Console.WriteLine("Effect : " + itemReader.ReadElementContentAsString());
-                            break;
+                        switch (itemReader.Name.ToString())
+                        {
+                            case "Name":
+                                Console.WriteLine("Item Name : " + itemReader.ReadElementContentAsString());
+                                break;
+                            case "UnlockRequirement":
+                                Console.WriteLine("UnlockRequirement : " + itemReader.ReadElementContentAsFloat());
+                                break;
+                            case "Description":
+                                Console.WriteLine("Description : " + itemReader.ReadElementContentAsString());
+                                break;
+                            case "Effect":
+                                Console.WriteLine("Effect : " + itemReader.ReadElementContentAsString());
+                                break;
+                        }
                     }
                     Console.WriteLine("");
                 }
             }
+
 
             // TODO: hook up item data to display with the inventory
 
